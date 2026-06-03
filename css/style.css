@@ -1,0 +1,316 @@
+/* --- Variables de Diseño --- */
+:root {
+    --font-primary: 'Montserrat', sans-serif;
+    --font-accent: 'Outfit', sans-serif;
+    --tech-dark: #0f1115;
+    --tech-light: #f8fafc;
+    --accent-blue: #0d6efd;
+    --accent-cyan: #0dcaf0;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--tech-light);
+    color: #334155;
+    overflow-x: hidden;
+}
+
+/* --- Tipografías Específicas --- */
+.header-title, .title-tech, .brand-footer {
+    font-family: var(--font-primary);
+}
+
+.card-title-tech, .section-subtitle, .speech-text {
+    font-family: var(--font-accent);
+}
+
+/* --- Navbar con Microinteracciones --- */
+.navbar {
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background-color: rgba(15, 17, 21, 0.85) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.4s ease;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--accent-cyan) !important;
+}
+
+.btn-contact-nav {
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+.btn-contact-nav:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(13, 202, 240, 0.4);
+}
+
+/* Animación sutil de pulso para el ícono de la marca */
+.anim-pulse {
+    display: inline-block;
+    animation: pulse 2.5s infinite ease-in-out;
+}
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.15); opacity: 0.8; }
+}
+
+/* --- Hero Section Premium --- */
+.hero {
+    position: relative;
+    background: linear-gradient(145deg, rgba(15, 17, 21, 0.92), rgba(13, 110, 253, 0.35)), 
+                url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    color: white;
+    z-index: 1;
+}
+
+.text-gradient {
+    background: linear-gradient(90deg, #0dcaf0, #0d6efd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+.btn-gradient {
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+    border: none;
+    color: white;
+    padding: 14px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-family: var(--font-accent);
+    letter-spacing: 0.5px;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.btn-gradient:hover {
+    transform: translateY(-4px);
+    color: white;
+    box-shadow: 0 12px 25px rgba(13, 110, 253, 0.4);
+}
+
+.btn-custom-outline {
+    font-family: var(--font-accent);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+}
+.btn-custom-outline:hover {
+    border-color: var(--accent-cyan);
+    background-color: rgba(13, 202, 240, 0.1);
+}
+
+/* --- Sección Servicios Avanzada --- */
+.section-services {
+    padding: 120px 0;
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.tracking-wider {
+    letter-spacing: 2px;
+}
+
+.pipeline-indicator {
+    height: 4px; 
+    width: 60px; 
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+}
+
+/* --- Tarjetas de Servicio Estilo Dashboard --- */
+.card-service {
+    background: #ffffff;
+    border: 1px solid rgba(226, 232, 240, 0.8) !important;
+    border-radius: 24px;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.card-service:hover {
+    transform: translateY(-10px);
+    border-color: rgba(13, 202, 240, 0.3) !important;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08) !important;
+}
+
+.icon-box {
+    width: 75px;
+    height: 75px;
+    background: rgba(13, 110, 253, 0.05);
+    border: 1px solid rgba(13, 110, 253, 0.1);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    margin-bottom: 1.8rem;
+    transition: all 0.4s ease;
+}
+
+.card-service:hover .icon-box {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    color: white !important;
+    transform: rotate(5deg) scale(1.05);
+}
+
+.card-title-tech {
+    color: #1e293b;
+    font-size: 1.35rem;
+}
+
+/* --- Footer Tecnológico --- */
+.footer-tech {
+    background-color: var(--tech-dark) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tech-sub {
+    font-family: var(--font-accent);
+    font-weight: 300;
+}
+
+.social-link-icon {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.6rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.social-link-icon:hover {
+    color: var(--accent-cyan);
+    transform: translateY(-3px);
+}
+
+/* --- Estilos Premium para el Modal --- */
+.style-modal-tech {
+    border-radius: 24px !important;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
+.style-modal-tech .form-control, 
+.style-modal-tech .form-select {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-family: var(--font-accent);
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.style-modal-tech .form-control:focus, 
+.style-modal-tech .form-select:focus {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 0 4px rgba(13, 202, 240, 0.15);
+    background-color: #fff;
+}
+
+.style-modal-tech .input-group-text {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+/* Integración visual con los iconos internos al enfocar */
+.style-modal-tech .input-group:focus-within .input-group-text {
+    border-color: var(--accent-cyan);
+    color: var(--accent-blue) !important;
+}
+
+/* --- Validaciones de Feedback Estético --- */
+.was-validated .form-control:valid, 
+.was-validated .form-select:valid {
+    border-color: #10b981 !important; /* Verde Esmeralda */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2310b981' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.74L3.43 6.7c-.3.3-1 .3-1.13 0z'/%3e%3c/svg%3e");
+}
+
+.was-validated .form-control:invalid, 
+.was-validated .form-select:invalid {
+    border-color: #ef4444 !important; /* Rojo Coral */
+}
+/* --- Ajustes de Imágenes en Tarjetas de Servicios --- */
+.card-img-container {
+    position: relative;
+    height: 180px;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--tech-dark);
+}
+
+.tech-project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    opacity: 0.85;
+}
+
+/* Efecto hover sobre la imagen */
+.card-service:hover .tech-project-img {
+    transform: scale(1.08);
+    opacity: 1;
+}
+
+/* Rediseño del contenedor del icono como Badge flotante */
+.icon-box-badge {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 55px;
+    height: 55px;
+    background: #ffffff;
+    border: 1px solid rgba(13, 110, 253, 0.15);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.1);
+    transition: all 0.4s ease;
+    z-index: 2;
+}
+
+.card-service:hover .icon-box-badge {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    color: white !important;
+    transform: translateX(-50%) rotate(5deg) scale(1.05);
+}
+
+/* Botón de galería */
+.btn-view-gallery {
+    font-family: var(--font-accent);
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.btn-view-gallery:hover {
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+    border-color: transparent;
+    color: white;
+}
+
+/* Estilos de las imágenes dentro del lightbox/modal */
+.gallery-thumbnail {
+    border-radius: 14px;
+    overflow: hidden;
+    height: 200px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}
+.gallery-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.gallery-thumbnail:hover {
+    transform: scale(1.03);
+}
