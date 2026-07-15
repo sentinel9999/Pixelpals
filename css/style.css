@@ -8,6 +8,19 @@
     --accent-cyan: #0dcaf0;
 }
 
+/* --- Suavizado de Desplazamiento Global --- */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Compensación para el menú sticky ( sticky-top ) */
+section, header {
+    scroll-margin-top: 75px; /* Ajusta este valor según la altura real de tu navbar */
+}
+
+
+
+
 body {
     font-family: var(--font-primary);
     background-color: var(--tech-light);

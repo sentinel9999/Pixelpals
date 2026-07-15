@@ -7,21 +7,100 @@ AOS.init({
 
 // =========================================================================
 // 2. Validación nativa de formularios de Bootstrap 5
-// =========================================================================
+
 (function () {
     'use strict';
     var forms = document.querySelectorAll('.needs-validation');
     Array.prototype.slice.call(forms).forEach(function (form) {
         form.addEventListener('submit', function (event) {
+            // Evitamos comportamiento por defecto si el formulario no es válido
             if (!form.checkValidity()) {
                 event.preventDefault();
                 event.stopPropagation();
+                form.classList.add('was-validated');
+                return;
             }
-            form.classList.add('was-validated');
+            
+            // Si es válido, prevenimos la redirección predeterminada de Formspree
+            event.preventDefault();
+            
+            const btnSubmit = form.querySelector('[type="submit"]');
+            const originalText = btnSubmit.textContent;
+            
+            // Cambiar estado del botón a modo carga
+            btnSubmit.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Procesando...';
+            btnSubmit.disabled = true;
+
+            const data = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // Guardamos la referencia del modal actual
+                    const modalBody = form.closest('.modal-body');
+                    
+                    // Efecto de desvanecimiento del formulario
+                    form.style.transition = 'opacity 0.3s ease';
+                    form.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        // Ocultamos por completo el formulario
+                        form.classList.add('d-none');
+                        
+                        // Creamos la alerta estética con la línea visual de PixelPals
+                        const mensajeExito = document.createElement('div');
+                        mensajeExito.className = 'text-center py-4 animate__animated animate__fadeIn';
+                        mensajeExito.innerHTML = `
+                            <div class="mb-4 d-inline-flex align-items-center justify-content-center bg-success bg-opacity-10 text-success rounded-circle" style="width: 80px; height: 80px;">
+                                <i class="bi bi-check-circle-fill" style="font-size: 3rem;"></i>
+                            </div>
+                            <h4 class="fw-bold text-dark font-accent mb-2">¡Solicitud Recibida!</h4>
+                            <p class="text-muted small mx-auto speech-text mb-4" style="max-width: 320px;">
+                                Los detalles técnicos de tu cotización han sido empaquetados y enviados con éxito al equipo de ingeniería.
+                            </p>
+                            <button type="button" class="btn btn-gradient px-4 py-2 text-white" data-bs-dismiss="modal">Entendido</button>
+                        `;
+                        
+                        // Inyectamos la alerta dentro del modal
+                        modalBody.appendChild(mensajeExito);
+                        
+                        // Escuchamos cuando se cierre el modal para reestablecer todo limpiamente para el próximo clic
+                        const modalEl = document.getElementById('modalCita');
+                        modalEl.addEventListener('hidden.bs.modal', function resetModalState() {
+                            form.reset();
+                            form.classList.remove('was-validated');
+                            form.style.opacity = '1';
+                            form.classList.remove('d-none');
+                            mensajeExito.remove();
+                            
+                            const contenedorCuestionario = document.getElementById('cuestionarioDinamico');
+                            if (contenedorCuestionario) contenedorCuestionario.classList.add('d-none');
+                            
+                            // Removemos el listener para evitar duplicaciones futuras
+                            modalEl.removeEventListener('hidden.bs.modal', resetModalState);
+                        });
+                        
+                    }, 300);
+
+                } else {
+                    alert("Hubo un problema al procesar tu cuestionario. Por favor, inténtalo de nuevo.");
+                    btnSubmit.textContent = originalText;
+                    btnSubmit.disabled = false;
+                }
+            }).catch(error => {
+                alert("Error de conexión de red. Verifica tus parámetros e intenta nuevamente.");
+                btnSubmit.textContent = originalText;
+                btnSubmit.disabled = false;
+            });
+
         }, false);
     });
 })();
-
 // =========================================================================
 // 3. Banco de Preguntas Dinámicas para el Cuestionario de Cotización
 // =========================================================================
@@ -220,3 +299,19 @@ if (elModalGaleria) {
         });
     });
 }
+
+// =========================================================================
+// Extra: Cerrar menú móvil automáticamente al hacer scroll a una sección
+// =========================================================================
+document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        const navbarCollapse = document.getElementById('navbarNav');
+        // Si el menú móvil está desplegado (tiene la clase 'show' de Bootstrap)
+        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+            const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+            if (bsCollapse) {
+                bsCollapse.hide();
+            }
+        }
+    });
+});
