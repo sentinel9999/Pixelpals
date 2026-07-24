@@ -6,8 +6,8 @@ import { QUESTIONS_BY_SERVICE } from '@/data/pixelpalsData';
 
 const slideVariants = {
   hidden: (direction: number) => ({ x: direction > 0 ? 50 : -50, opacity: 0 }),
-  visible: { x: 0, opacity: 1, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } },
-  exit: (direction: number) => ({ x: direction < 0 ? 50 : -50, opacity: 0, transition: { duration: 0.3 } })
+  visible: { x: 0, opacity: 1, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } },
+  exit: (direction: number) => ({ x: direction < 0 ? 50 : -50, opacity: 0, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } })
 };
 
 export default function QuoteModal({ isOpen, mode, onClose }: any) {
@@ -15,7 +15,6 @@ export default function QuoteModal({ isOpen, mode, onClose }: any) {
   const [direction, setDirection] = useState(1);
   const [formData, setFormData] = useState<any>({});
 
-  // Cada vez que el modal se abre o cambia de modo, reiniciamos el formulario al Paso 1
   useEffect(() => {
     if (isOpen) {
       setStep(1);
@@ -38,15 +37,21 @@ export default function QuoteModal({ isOpen, mode, onClose }: any) {
           className="modal-dialog modal-dialog-centered w-100 px-3" style={{ maxWidth: '550px' }}
         >
           <div className="modal-content border-0 shadow-lg style-modal-tech w-100">
-            <div className="modal-header border-0 bg-dark position-relative" style={{ borderRadius: '24px 24px 0 0' }}>
-              <h5 className="modal-title fw-bold font-accent text-white">
+            <div className="modal-header border-0 bg-dark position-relative d-flex justify-content-between align-items-center px-4 py-3" style={{ borderRadius: '24px 24px 0 0' }}>
+              <h5 className="modal-title fw-bold font-accent text-white m-0">
                 {isQuote ? <><i className="bi bi-calculator text-info me-2"></i>Solicitar Cotización</> : <><i className="bi bi-envelope-check text-info me-2"></i>Hablemos</>}
               </h5>
-              <button type="button" onClick={onClose} className="btn-close btn-close-white"></button>
+              <button 
+                type="button" 
+                onClick={onClose} 
+                className="d-flex align-items-center justify-content-center text-white rounded-circle border border-white/20 transition-all"
+                style={{ width: '38px', height: '38px', background: 'rgba(255, 255, 255, 0.1)', cursor: 'pointer' }}
+              >
+                <X size={18} />
+              </button>
             </div>
             
             <div className="modal-body p-4 bg-light overflow-hidden">
-              {/* Barra de progreso */}
               {step <= totalSteps && (
                 <div className="cuestionario-progress mb-4">
                   <motion.div className="cuestionario-progress-bar" initial={{ width: 0 }} animate={{ width: `${(step / totalSteps) * 100}%` }} transition={{ duration: 0.5 }} />
@@ -55,7 +60,6 @@ export default function QuoteModal({ isOpen, mode, onClose }: any) {
 
               <div className="position-relative" style={{ minHeight: '300px' }}>
                 <AnimatePresence custom={direction} mode="wait">
-                  {/* PASO 1: Datos Generales */}
                   {step === 1 && (
                     <motion.form key="step1" custom={direction} variants={slideVariants} initial="hidden" animate="visible" exit="exit" onSubmit={(e) => { e.preventDefault(); nextStep(); }}>
                       <div className="mb-3">
@@ -84,7 +88,6 @@ export default function QuoteModal({ isOpen, mode, onClose }: any) {
                     </motion.form>
                   )}
 
-                  {/* PASO 2: Cuestionario Dinámico (Solo si es Cotización) */}
                   {step === 2 && isQuote && (
                     <motion.form key="step2" custom={direction} variants={slideVariants} initial="hidden" animate="visible" exit="exit" onSubmit={(e) => { e.preventDefault(); nextStep(); }}>
                       <div className="mb-3">
@@ -114,13 +117,12 @@ export default function QuoteModal({ isOpen, mode, onClose }: any) {
                     </motion.form>
                   )}
 
-                  {/* PANTALLA DE ÉXITO */}
                   {step > totalSteps && (
                     <motion.div key="success" custom={direction} variants={slideVariants} initial="hidden" animate="visible" className="text-center py-5">
                       <div className="mb-4 d-inline-flex align-items-center justify-content-center bg-success bg-opacity-10 text-success rounded-circle" style={{ width: '90px', height: '90px' }}>
                         <i className="bi bi-cpu text-info" style={{ fontSize: '3.5rem' }}></i>
                       </div>
-                      <h4 className="fw-bold text-white font-accent mb-2">Envío Exitoso</h4>
+                      <h4 className="fw-bold text-white font-accent mb-2">Ecosistema Enlazado</h4>
                       <p className="text-muted small mx-auto speech-text mb-4">Los requerimientos técnicos han sido procesados. Nos comunicaremos de inmediato.</p>
                       <button onClick={onClose} className="btn btn-gradient px-5 py-2 text-white">Cerrar</button>
                     </motion.div>
