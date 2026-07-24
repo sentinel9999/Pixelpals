@@ -31,3 +31,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+export const metadata = {
+  title: 'PixelPals | Ecosistema de Automatización', // <-- Modifica el título aquí
+  description: 'Expertos en automatización, redes, domótica...', // <-- Modifica la descripción aquí
+  openGraph: {
+    title: 'PixelPals | Ecosistema de Automatización',
+    description: 'Expertos en automatización, redes, domótica...',
+    url: 'https://pixelpalz.netlify.app',
+    siteName: 'PixelPals',
+    images: [
+      {
+        url: '/IMG/Fondos/lobo.png', // <-- Ruta de la imagen miniatura que se ve al compartir
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'es_MX',
+    type: 'website',
+  },
+};
