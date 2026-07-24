@@ -1,26 +1,472 @@
-@import "tailwindcss";
 
+/* --- Variables de Diseño --- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --font-primary: 'Montserrat', sans-serif;
+    --font-accent: 'Outfit', sans-serif;
+    --tech-dark: #0f1115;
+    --tech-light: #f8fafc;
+    --accent-blue: #0d6efd;
+    --accent-cyan: #0dcaf0;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* --- Suavizado de Desplazamiento Global --- */
+html {
+    scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Compensación para el menú sticky ( sticky-top ) */
+section, header {
+    scroll-margin-top: 75px; /* Ajusta este valor según la altura real de tu navbar */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font-primary);
+    background-color: var(--tech-light);
+    color: #334155;
+    overflow-x: hidden;
+}
+
+/* --- Tipografías Específicas --- */
+.header-title, .title-tech, .brand-footer {
+    font-family: var(--font-primary);
+}
+
+.card-title-tech, .section-subtitle, .speech-text {
+    font-family: var(--font-accent);
+}
+
+/* --- Navbar con Microinteracciones --- */
+.navbar {
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background-color: rgba(15, 17, 21, 0.85) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.4s ease;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--accent-cyan) !important;
+}
+
+.btn-contact-nav {
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+.btn-contact-nav:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(13, 202, 240, 0.4);
+}
+
+/* Animación sutil de pulso para el ícono de la marca */
+.anim-pulse {
+    display: inline-block;
+    animation: pulse 2.5s infinite ease-in-out;
+}
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.15); opacity: 0.8; }
+}
+
+/* --- Hero Section Premium --- */
+.hero {
+    position: relative;
+    background: linear-gradient(145deg, rgba(15, 17, 21, 0.92), rgba(13, 110, 253, 0.35)), 
+                url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    color: white;
+    z-index: 1;
+}
+
+.hero2 {
+    position: relative;
+    background: linear-gradient(145deg, rgba(15, 17, 21, 0.92), rgba(13, 110, 253, 0.35)), 
+                url('/IMG/Fondos/fondo1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    color: white;
+    z-index: 1;
+}
+
+.text-gradient {
+    background: linear-gradient(90deg, #0dcaf0, #0d6efd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+.btn-gradient {
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+    border: none;
+    color: white;
+    padding: 14px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-family: var(--font-accent);
+    letter-spacing: 0.5px;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.btn-gradient:hover {
+    transform: translateY(-4px);
+    color: white;
+    box-shadow: 0 12px 25px rgba(13, 110, 253, 0.4);
+}
+
+.btn-custom-outline {
+    font-family: var(--font-accent);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+}
+.btn-custom-outline:hover {
+    border-color: var(--accent-cyan);
+    background-color: rgba(13, 202, 240, 0.1);
+}
+
+/* --- Sección Servicios Avanzada --- */
+.section-services {
+    padding: 120px 0;
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.tracking-wider {
+    letter-spacing: 2px;
+}
+
+.pipeline-indicator {
+    height: 4px; 
+    width: 60px; 
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+}
+
+/* --- Tarjetas de Servicio Estilo Dashboard (FONDO BLANCO PRESERVADO) --- */
+.card-service {
+    background: #ffffff !important;
+    border: 1px solid rgba(226, 232, 240, 0.8) !important;
+    border-radius: 24px;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Brillo 3D dinámico al pasar el cursor */
+.card-service::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 1.5px;
+    background: linear-gradient(135deg, transparent, transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    transition: background 0.4s ease;
+    pointer-events: none;
+}
+
+.card-service:hover {
+    transform: perspective(1000px) translateY(-10px) rotateX(1deg) rotateY(1deg);
+    border-color: rgba(13, 202, 240, 0.4) !important;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08) !important;
+}
+
+.card-service:hover::before {
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+}
+
+/* Brillo interactivo que sigue al mouse (Calculado en JS) */
+.card-service::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(400px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(13, 202, 240, 0.06), transparent 40%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.card-title-tech {
+    color: #1e293b;
+    font-size: 1.35rem;
+}
+
+/* --- Ajustes de Imágenes en Tarjetas de Servicios --- */
+.card-img-container {
+    position: relative;
+    height: 180px;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--tech-dark);
+}
+
+.tech-project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    opacity: 0.85;
+}
+
+/* Efecto hover sobre la imagen */
+.card-service:hover .tech-project-img {
+    transform: scale(1.08);
+    opacity: 1;
+}
+
+/* Rediseño del contenedor del icono como Badge flotante */
+.icon-box-badge {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 55px;
+    height: 55px;
+    background: #ffffff;
+    border: 1px solid rgba(13, 110, 253, 0.15);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.1);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 2;
+}
+
+.card-service:hover .icon-box-badge {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    color: white !important;
+    transform: translateX(-50%) rotate(8deg) scale(1.1);
+    box-shadow: 0 8px 25px rgba(13, 202, 240, 0.3);
+}
+
+/* Botón de galería */
+.btn-view-gallery {
+    font-family: var(--font-accent);
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.btn-view-gallery:hover {
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+    border-color: transparent;
+    color: white;
+}
+
+/* --- Presentación de Evidencias Integrada (Carrusel) --- */
+.carousel-inner {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.carousel-img-wrap {
+    height: 440px;
+    width: 100%;
+    background-color: #0b0f19;
+}
+
+.carousel-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.carousel-caption-custom {
+    background: rgba(15, 17, 21, 0.95);
+    backdrop-filter: blur(8px);
+    border-top: 2px solid var(--accent-cyan);
+    padding: 15px;
+    color: #ffffff;
+    font-family: var(--font-accent);
+}
+
+.evidence-meta-badge {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: rgba(13, 202, 240, 0.15);
+    color: var(--accent-cyan);
+    border: 1px solid rgba(13, 202, 240, 0.25);
+    margin-right: 6px;
+    font-family: var(--font-accent);
+}
+
+/* --- Progress Bar para Cuestionario --- */
+.cuestionario-progress {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.cuestionario-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+    box-shadow: 0 0 10px rgba(13, 202, 240, 0.5);
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Estilos Premium del Modal de Cotización (MODO OSCURO PRO) --- */
+.style-modal-tech {
+    background-color: #111827 !important; 
+    border: 1px solid rgba(6, 182, 212, 0.2) !important;
+    border-radius: 24px !important;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+.style-modal-tech .modal-body.bg-light {
+    background-color: #151f32 !important; 
+}
+
+.pregunta-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease;
+}
+
+.pregunta-card:focus-within {
+    border-color: var(--accent-cyan);
+}
+
+/* Campos de Texto y Áreas de entrada dentro del modal */
+.style-modal-tech .form-control, 
+.style-modal-tech .form-select {
+    background-color: #0b0f19 !important;
+    border: 1px solid #1f2937 !important;
+    color: #f1f5f9 !important;
+    border-radius: 12px;
+    padding: 11px 14px;
+    font-family: var(--font-accent);
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+/* Cajas de Íconos del Cuestionario (Corrección Completa del Parche Blanco) */
+.style-modal-tech .input-group-text {
+    background-color: #0b0f19 !important;
+    border: 1px solid #1f2937 !important;
+    color: var(--accent-cyan) !important; 
+    border-radius: 12px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Marcadores de posición claros */
+.style-modal-tech .form-control::placeholder,
+.style-modal-tech textarea::placeholder {
+    color: #4b5563 !important;
+    opacity: 1;
+}
+
+.style-modal-tech .form-control:focus, 
+.style-modal-tech .form-select:focus {
+    border-color: var(--accent-cyan) !important;
+    box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.15) !important;
+    background-color: #0b0f19 !important;
+    color: #ffffff !important;
+}
+
+.style-modal-tech .input-group:focus-within .input-group-text,
+.style-modal-tech .input-group:focus-within .form-control {
+    border-color: var(--accent-cyan) !important;
+}
+
+.style-modal-tech label.text-muted {
+    color: #9ca3af !important;
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+}
+
+/* --- Validaciones de Feedback Estético --- */
+.was-validated .form-control:valid, 
+.was-validated .form-select:valid {
+    border-color: #10b981 !important; 
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2310b981' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.74L3.43 6.7c-.3.3-1 .3-1.13 0z'/%3e%3c/svg%3e");
+}
+
+.was-validated .form-control:invalid, 
+.was-validated .form-select:invalid {
+    border-color: #ef4444 !important; 
+}
+
+/* --- Tarjeta Glassmorphism para la sección Nosotros --- */
+.about-card {
+    background: rgba(15, 17, 21, 0.75); 
+    backdrop-filter: blur(16px);         
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08); 
+    border-radius: 24px;                 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.about-card .speech-text {
+    color: rgba(255, 255, 255, 0.85) !important; 
+    line-height: 1.7;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+}
+
+/* Forzar que las imágenes de equipo mantengan la consistencia de diseño */
+.hero2 img {
+    border-radius: 24px !important;
+    transition: transform 0.4s ease;
+}
+.hero2 img:hover {
+    transform: scale(1.02);
+}
+
+/* --- Footer Tecnológico --- */
+.footer-tech {
+    background-color: var(--tech-dark) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tech-sub {
+    font-family: var(--font-accent);
+    font-weight: 300;
+}
+
+.social-link-icon {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.6rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.social-link-icon:hover {
+    color: var(--accent-cyan);
+    transform: translateY(-3px);
+}
+
+/* Swiper Overrides para diseño premium */
+.swiper-pagination-bullet-active {
+  background: #0dcaf0 !important;
+  width: 24px !important;
+  border-radius: 4px !important;
+}
+.swiper-button-next, .swiper-button-prev {
+  color: #fff !important;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  width: 45px !important;
+  height: 45px !important;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.1);
 }
