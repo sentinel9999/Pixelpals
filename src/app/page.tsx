@@ -9,7 +9,7 @@ import GalleryModal from '@/components/GalleryModal';
 import { SERVICES } from '@/data/pixelpalsData';
 
 const staggerContainer = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.15 } } };
-const fadeUp = { hidden: { opacity: 0, y: 40 }, show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } };
+const fadeUp = { hidden: { opacity: 0, y: 40 }, show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" as const } } };
 
 export default function Home() {
   const [modalMode, setModalMode] = useState<'contacto' | 'cotizacion'>('contacto');
@@ -86,7 +86,7 @@ export default function Home() {
                 </p>
               </div>
             </motion.div>
-            <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2, ease: "easeOut" }} viewport={{ once: true }} className="col-lg-6 text-center">
+            <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2, ease: "easeOut" as const }} viewport={{ once: true }} className="col-lg-6 text-center">
               <img src="/IMG/Fondos/lobo.jpeg" alt="Equipo" className="img-fluid rounded-4 shadow-lg" />
             </motion.div>
           </div>
