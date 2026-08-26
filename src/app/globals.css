@@ -227,7 +227,7 @@ body {
 /* Rediseño del contenedor del icono como Badge flotante */
 .icon-box-badge {
     position: absolute;
-    bottom: -20px;
+    bottom: -7px;
     left: 50%;
     transform: translateX(-50%);
     width: 55px;
