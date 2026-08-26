@@ -1,75 +1,133 @@
 'use client';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { X, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 import { EVIDENCES_BY_SERVICE, SERVICES } from '@/data/pixelpalsData';
-import { X } from 'lucide-react';
-
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
 
 export default function GalleryModal({ isOpen, serviceId, onClose }: any) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Reiniciar el índice al abrir el modal o cambiar de servicio
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [isOpen, serviceId]);
+
   if (!isOpen || !serviceId) return null;
+
+  const serviceInfo = SERVICES.find((s) => s.id === serviceId);
   const evidences = EVIDENCES_BY_SERVICE[serviceId] || [];
-  const serviceName = SERVICES.find((s:any) => s.id === serviceId)?.title || '';
+  const currentEvidence = evidences[currentIndex];
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev === 0 ? evidences.length - 1 : prev - 1));
+  };
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev === evidences.length - 1 ? 0 : prev + 1));
+  };
 
   return (
     <AnimatePresence>
-      <div className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style={{ zIndex: 1055, background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(10px)' }}>
+      <div className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style={{ zIndex: 1055, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)' }}>
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}
-          className="modal-dialog modal-xl modal-dialog-centered w-100 px-3"
+          initial={{ opacity: 0, scale: 0.95 }} 
+          animate={{ opacity: 1, scale: 1 }} 
+          exit={{ opacity: 0, scale: 0.95 }}
+          className="modal-dialog modal-dialog-centered w-100 px-3" 
+          style={{ maxWidth: '850px' }}
         >
-          <div className="modal-content border-0 style-modal-tech text-white shadow-lg">
+          <div className="modal-content border-0 shadow-lg style-modal-tech w-100 overflow-hidden">
             
-            {/* ENCABEZADO CON FLEXBOX: Título a la izquierda, Botón de cierre visible a la derecha */}
-            <div className="modal-header border-0 bg-dark d-flex justify-content-between align-items-center px-4 py-3">
-              <h5 className="modal-title fw-bold font-accent text-info m-0">Evidencias — {serviceName}</h5>
+            {/* Header del Modal */}
+            <div className="modal-header border-0 bg-dark position-relative d-flex justify-content-between align-items-center px-4 py-3" style={{ borderRadius: '24px 24px 0 0' }}>
+              <h5 className="modal-title fw-bold font-accent text-white m-0 d-flex align-items-center">
+                <i className="bi bi-display text-info me-2"></i> 
+                Evidencias: {serviceInfo?.title || 'Proyecto'}
+              </h5>
               <button 
                 type="button" 
                 onClick={onClose} 
                 className="d-flex align-items-center justify-content-center text-white rounded-circle border border-white/20 transition-all"
-                style={{ 
-                  width: '38px', 
-                  height: '38px', 
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  cursor: 'pointer'
-                }}
+                style={{ width: '38px', height: '38px', background: 'rgba(255, 255, 255, 0.1)', cursor: 'pointer' }}
               >
                 <X size={18} />
               </button>
             </div>
-
-            <div className="modal-body p-4 bg-dark overflow-hidden">
-              <Swiper
-                effect={'coverflow'}
-                grabCursor={true}
-                centeredSlides={true}
-                slidesPerView={'auto'}
-                loop={true}
-                autoplay={{ delay: 3500, disableOnInteraction: false }}
-                coverflowEffect={{ rotate: 40, stretch: 0, depth: 250, modifier: 1, slideShadows: true }}
-                pagination={{ clickable: true, dynamicBullets: true }}
-                navigation={true}
-                modules={[EffectCoverflow, Autoplay, Pagination, Navigation]}
-                className="w-100 py-4"
-              >
-                {evidences.map((ev: any, idx: number) => (
-                  <SwiperSlide key={idx} style={{ width: '800px', maxWidth: '90vw', height: '450px', backgroundColor: '#0b0f19' }} className="rounded-4 overflow-hidden position-relative">
-                    <img src={ev.src} className="w-100 h-100" style={{ objectFit: 'contain' }} alt="Evidencia" />
-                    <div className="position-absolute bottom-0 start-0 w-100 carousel-caption-custom" style={{ background: 'linear-gradient(to top, rgba(11, 15, 25, 0.95) 40%, transparent)' }}>
-                      <div className="d-flex flex-wrap mb-2">
-                         <span className="evidence-meta-badge"><i className="bi bi-person me-1"></i>{ev.autor}</span>
-                         <span className="evidence-meta-badge"><i className="bi bi-calendar3 me-1"></i>{ev.fecha}</span>
-                      </div>
-                      <p className="mb-0 small opacity-90">{ev.desc}</p>
+            
+            {/* Body del Modal */}
+            <div className="modal-body p-4 bg-light">
+              {evidences.length === 0 ? (
+                <div className="text-center py-5 text-muted">No hay evidencias registradas para este servicio todavía.</div>
+              ) : (
+                <div className="position-relative">
+                  <div className="rounded-4 shadow-sm bg-dark overflow-hidden">
+                    
+                    {/* Contenedor de la imagen */}
+                    <div className="carousel-img-wrap position-relative d-flex align-items-center justify-content-center" style={{ height: '420px', background: '#080c14' }}>
+                      <img 
+                        src={currentEvidence.src} 
+                        className="d-block w-100 h-100" 
+                        style={{ objectFit: 'contain' }} 
+                        alt={currentEvidence.desc} 
+                      />
+                      
+                      {/* BOTÓN FLOTANTE SUPERIOR (Panel en vivo) */}
+                      {currentEvidence.link && (
+                        <div className="position-absolute top-0 end-0 p-3" style={{ zIndex: 10 }}>
+                          <a 
+                            href={currentEvidence.link} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="btn btn-gradient shadow-lg d-inline-flex align-items-center gap-2 fw-bold px-3 py-2 text-white"
+                            style={{ fontSize: '0.85rem' }}
+                          >
+                            <ExternalLink size={16} /> Ver Demo
+                          </a>
+                        </div>
+                      )}
                     </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+
+                    {/* Pie de foto / Barra de información */}
+                    <div className="carousel-caption-custom position-relative">
+                      <div className="d-flex flex-wrap gap-2 mb-2 align-items-center justify-content-between">
+                        <div className="d-flex flex-wrap gap-2">
+                          <span className="evidence-meta-badge"><i className="bi bi-person me-1"></i> {currentEvidence.autor}</span>
+                          <span className="evidence-meta-badge"><i className="bi bi-calendar me-1"></i> {currentEvidence.fecha}</span>
+                        </div>
+                        {evidences.length > 1 && (
+                          <span className="text-white-50 small font-accent">
+                            {currentIndex + 1} de {evidences.length}
+                          </span>
+                        )}
+                      </div>
+                      <p className="mb-0 text-white-50 small text-start">{currentEvidence.desc}</p>
+                    </div>
+
+                  </div>
+
+                  {/* Flechas de navegación funcionales con React */}
+                  {evidences.length > 1 && (
+                    <>
+                      <button 
+                        onClick={prevSlide}
+                        className="position-absolute top-50 start-0 translate-middle-y btn btn-dark bg-opacity-75 text-white border-0 ms-2 rounded-circle d-flex align-items-center justify-content-center shadow"
+                        style={{ width: '45px', height: '45px', zIndex: 20 }}
+                      >
+                        <ChevronLeft size={24} />
+                      </button>
+                      <button 
+                        onClick={nextSlide}
+                        className="position-absolute top-50 end-0 translate-middle-y btn btn-dark bg-opacity-75 text-white border-0 me-2 rounded-circle d-flex align-items-center justify-content-center shadow"
+                        style={{ width: '45px', height: '45px', zIndex: 20 }}
+                      >
+                        <ChevronRight size={24} />
+                      </button>
+                    </>
+                  )}
+                </div>
+              )}
             </div>
+
           </div>
         </motion.div>
       </div>

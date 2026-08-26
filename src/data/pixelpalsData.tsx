@@ -16,9 +16,10 @@ export const SERVICES = [
   {
     id: 'web',
     title: 'Desarrollo Web',
-    description: 'Interfaces de telemetría y control a través de la web a la medida para procesamiento de datos en tiempo real.',
+    description: 'Interfaces web diseñadas a la necesidad de tu negocio.',
     imageSrc: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600',
     iconClass: 'bi bi-code-slash', // Actualizado
+    
   },
   {
     id: 'cableado',
@@ -37,7 +38,7 @@ export const SERVICES = [
   {
     id: 'soporte',
     title: 'Soporte Técnico',
-    description: 'Diagnóstico de buses de comunicación, calibración de sensores y asistencia especializada.',
+    description: 'Diagnóstico de equipos, calibración de sensores y asistencia especializada.',
     imageSrc: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&q=80&w=600',
     iconClass: 'bi bi-headset', // Actualizado
   },
@@ -73,26 +74,32 @@ export const QUESTIONS_BY_SERVICE: Record<string, any[]> = {
 
 export const EVIDENCES_BY_SERVICE: Record<string, any[]> = {
   domotica: [
-    { src: '/IMG/Evidencias/domotica1.jpeg', desc: 'Integración de sistemas de alarma residencial.', autor: 'Santiago Gómez', fecha: '2026-02', estado: 'Desplegado' }
+    { src: '/IMG/Evidencias/domotica1.jpeg', desc: 'Integración de sistemas de alarma residencial.',  fecha: '2026-02', estado: 'Desplegado' }
   ],
   cctv: [
-    { src: '/IMG/CCTV/Camaras (3).jpeg', desc: 'Cámaras punto fijo.', autor: 'Santiago Gómez', fecha: '2026-03', estado: 'Activo' },
-    { src: '/IMG/CCTV/Camara 360.jpeg', desc: 'Cámaras 360°.', autor: 'Ingeniería Campo', fecha: '2026-01', estado: 'Monitoreado' },
-    { src: '/IMG/CCTV/integrado.jpeg', desc: 'Sistema hibrido°.', autor: 'Ingeniería Campo', fecha: '2026-01', estado: 'Monitoreado' }
+    { src: '/IMG/CCTV/Camaras (3).jpeg', desc: 'Cámaras punto fijo.',fecha: '2026-03', estado: 'Activo' },
+    { src: '/IMG/CCTV/Camara 360.jpeg', desc: 'Cámaras 360°.', fecha: '2026-01', estado: 'Monitoreado' },
+    { src: '/IMG/CCTV/integrado.jpeg', desc: 'Sistema hibrido°.', fecha: '2026-01', estado: 'Monitoreado' }
   ],
   web: [
-    { src: '/IMG/Evidencias/web1.jpeg', desc: 'Interfaz de telemetría en tiempo real.', autor: 'Santiago Gomez', fecha: '2026-04', estado: 'Estable' }
+    { src: '/IMG/Landing_page.png', 
+      desc: 'Landing page interactiva para diseñadores de multimedia y editores de video.', 
+      fecha: '2026-04', 
+      estado: 'Estable',
+      link: 'https://landingpagevideoeditor.netlify.app' }
+    
   ],
   cableado: [
-    { src: '/IMG/Evidencias/cableado_estructurado1.jpeg', desc: 'Peinado y certificación de rack Cat6A.', autor: 'Redes Core', fecha: '2026-06', estado: 'Certificado' },
-    { src: '/IMG/Evidencias/cableado_estructurado2.jpeg', desc: 'Peinado y certificación de rack Cat6A.', autor: 'Redes Core', fecha: '2026-06', estado: 'Certificado' },
-    { src: '/IMG/Evidencias/pruebas_red.jpeg', desc: 'Instalación de patch panel y switch.', autor: 'Redes Core', fecha: '2026-06', estado: 'Certificado' }
+    { src: '/IMG/Evidencias/cableado_estructurado1.jpeg', desc: 'Peinado y certificación de rack Cat6A.',  fecha: '2026-06', estado: 'Certificado' },
+    { src: '/IMG/Evidencias/cableado_estructurado2.jpeg', desc: 'Peinado y certificación de rack Cat6A.', fecha: '2026-06', estado: 'Certificado' },
+    { src: '/IMG/Evidencias/pruebas_red.jpeg', desc: 'Instalación de patch panel y switch.',  fecha: '2026-06', estado: 'Certificado' }
   ],
   mantenimiento: [
-    { src: '/IMG/Evidencias/mantenimiento1.jpeg', desc: 'Instalación de gabinete de control.', autor: 'Santiago Gómez', fecha: '2026-02', estado: 'Mantenido' },
-    { src: '/IMG/Evidencias/mantenimiento2.jpeg', desc: 'Revisión de sensores de temperatura.', autor: 'Sismedia RT', fecha: '2026-03', estado: 'Calibrado' }
+    { src: '/IMG/Evidencias/mantenimiento1.jpeg', desc: 'Instalación de gabinete de control.', fecha: '2026-02', estado: 'Mantenido' },
+    { src: '/IMG/Evidencias/mantenimiento2.jpeg', desc: 'Mantenimiento de ordenadores.',fecha: '2026-03', estado: 'Calibrado' },
+    { src: '/IMG/Evidencias/armado.jpeg', desc: 'Armado de equipos de cómputo.',fecha: '2026-03', estado: 'Calibrado' },
   ],
   soporte: [
-    { src: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&q=80&w=800', desc: 'Calibración de buses industriales Modbus.', autor: 'MUSS Lab', fecha: '2026-05', estado: 'Calibrado' }
+    { src: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&q=80&w=800', desc: 'Calibración de buses industriales Modbus.',  fecha: '2026-05', estado: 'Calibrado' }
   ]
 };
