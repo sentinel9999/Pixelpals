@@ -4,43 +4,44 @@ export const SERVICES = [
     title: 'Domótica',
     description: 'Sistemas de automatización residencial y comercial con control remoto y programación inteligente.',
     imageSrc: 'https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=600',
-    iconName: 'Home',
+    iconClass: 'bi bi-house-gear-fill', // Actualizado a clase de Bootstrap
   },
   {
     id: 'cctv',
     title: 'Sistemas CCTV',
     description: 'Sistemas de videovigilancia y seguridad para ambientes residenciales y comerciales.',
     imageSrc: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&q=80&w=600',
-    iconName: 'Shield',
+    iconClass: 'bi bi-camera-video-fill', // Actualizado
   },
   {
     id: 'web',
     title: 'Desarrollo Web',
     description: 'Interfaces de telemetría y control a través de la web a la medida para procesamiento de datos en tiempo real.',
     imageSrc: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600',
-    iconName: 'Code',
+    iconClass: 'bi bi-code-slash', // Actualizado
   },
   {
     id: 'cableado',
     title: 'Cableado Estructurado',
     description: 'Soluciones de infraestructura de red, cobre y fibra óptica para entornos de alta disponibilidad.',
     imageSrc: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&q=80&w=600',
-    iconName: 'Network',
+    iconClass: 'bi bi-hdd-network-fill', // Actualizado
   },
   {
     id: 'mantenimiento',
     title: 'Mantenimiento',
     description: 'Planes correctivos y preventivos para tableros de control, instrumentación y hardware IoT.',
     imageSrc: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=600',
-    iconName: 'Wrench',
+    iconClass: 'bi bi-tools', // Actualizado
   },
   {
     id: 'soporte',
     title: 'Soporte Técnico',
     description: 'Diagnóstico de buses de comunicación, calibración de sensores y asistencia especializada.',
     imageSrc: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&q=80&w=600',
-    iconName: 'Headset',
+    iconClass: 'bi bi-headset', // Actualizado
   },
+
 ];
 
 export const QUESTIONS_BY_SERVICE: Record<string, any[]> = {
