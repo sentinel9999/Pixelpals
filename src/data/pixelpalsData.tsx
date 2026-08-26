@@ -100,6 +100,7 @@ export const EVIDENCES_BY_SERVICE: Record<string, any[]> = {
     { src: '/IMG/Evidencias/armado.jpeg', desc: 'Armado de equipos de cómputo.',fecha: '2026-03', estado: 'Calibrado' },
   ],
   soporte: [
-    { src: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&q=80&w=800', desc: 'Calibración de buses industriales Modbus.',  fecha: '2026-05', estado: 'Calibrado' }
+    { src: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&q=80&w=800', desc: 'Configuración de redes.',  fecha: '2026-05', estado: 'Calibrado' },
+    { src: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&q=80&w=800', desc: 'Configuración de software.',  fecha: '2026-05', estado: 'Calibrado' }
   ]
 };
