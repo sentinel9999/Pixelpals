@@ -86,7 +86,7 @@ export const EVIDENCES_BY_SERVICE: Record<string, any[]> = {
       desc: 'Consola y panel de control IoT para monitoreo y telemetría de sensores en tiempo real.',
       fecha: '2026-04',
       estado: 'Activo',
-      link: '/demo-iot',
+      //link: '/demo-iot',
       buttonText: 'Ver Consola IoT'
     },
     // 2️⃣ Landing Page (Segundo)
