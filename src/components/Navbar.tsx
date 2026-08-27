@@ -35,6 +35,7 @@ export default function Navbar({ onOpenModal }: { onOpenModal: (m: 'contacto') =
             <li className="nav-item"><a className="nav-link px-3" href="#inicio">Inicio</a></li>
             <li className="nav-item"><a className="nav-link px-3" href="#servicios">Servicios</a></li>
             <li className="nav-item"><a className="nav-link px-3" href="#nosotros">Nosotros</a></li>
+        
             <li className="nav-item ms-lg-3">
               <button 
                 onClick={() => onOpenModal('contacto')}

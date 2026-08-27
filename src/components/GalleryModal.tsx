@@ -7,7 +7,6 @@ import { EVIDENCES_BY_SERVICE, SERVICES } from '@/data/pixelpalsData';
 export default function GalleryModal({ isOpen, serviceId, onClose }: any) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Reiniciar el índice al abrir el modal o cambiar de servicio
   useEffect(() => {
     setCurrentIndex(0);
   }, [isOpen, serviceId]);
@@ -28,7 +27,10 @@ export default function GalleryModal({ isOpen, serviceId, onClose }: any) {
 
   return (
     <AnimatePresence>
-      <div className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style={{ zIndex: 1055, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)' }}>
+      <div 
+        className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" 
+        style={{ zIndex: 1055, background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)' }}
+      >
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }} 
           animate={{ opacity: 1, scale: 1 }} 
@@ -54,7 +56,7 @@ export default function GalleryModal({ isOpen, serviceId, onClose }: any) {
               </button>
             </div>
             
-            {/* Body del Modal */}
+            {/* Cuerpo del Modal */}
             <div className="modal-body p-4 bg-light">
               {evidences.length === 0 ? (
                 <div className="text-center py-5 text-muted">No hay evidencias registradas para este servicio todavía.</div>
@@ -62,7 +64,7 @@ export default function GalleryModal({ isOpen, serviceId, onClose }: any) {
                 <div className="position-relative">
                   <div className="rounded-4 shadow-sm bg-dark overflow-hidden">
                     
-                    {/* Contenedor de la imagen */}
+                    {/* Contenedor de Imagen */}
                     <div className="carousel-img-wrap position-relative d-flex align-items-center justify-content-center" style={{ height: '420px', background: '#080c14' }}>
                       <img 
                         src={currentEvidence.src} 
@@ -71,28 +73,37 @@ export default function GalleryModal({ isOpen, serviceId, onClose }: any) {
                         alt={currentEvidence.desc} 
                       />
                       
-                      {/* BOTÓN FLOTANTE SUPERIOR (Panel en vivo) */}
+                      {/* Botón flotante dinámico */}
                       {currentEvidence.link && (
                         <div className="position-absolute top-0 end-0 p-3" style={{ zIndex: 10 }}>
                           <a 
                             href={currentEvidence.link} 
-                            target="_blank" 
+                            target={currentEvidence.link.startsWith('#') ? '_self' : '_blank'} 
                             rel="noopener noreferrer" 
+                            onClick={() => {
+                              if (currentEvidence.link.startsWith('#')) onClose();
+                            }}
                             className="btn btn-gradient shadow-lg d-inline-flex align-items-center gap-2 fw-bold px-3 py-2 text-white"
                             style={{ fontSize: '0.85rem' }}
                           >
-                            <ExternalLink size={16} /> Ver Demo
+                            <ExternalLink size={16} /> {currentEvidence.buttonText || 'Ver Demo'}
                           </a>
                         </div>
                       )}
                     </div>
 
-                    {/* Pie de foto / Barra de información */}
-                    <div className="carousel-caption-custom position-relative">
+                    {/* Metadata y descripción */}
+                    <div className="carousel-caption-custom position-relative p-3">
                       <div className="d-flex flex-wrap gap-2 mb-2 align-items-center justify-content-between">
                         <div className="d-flex flex-wrap gap-2">
-                          <span className="evidence-meta-badge"><i className="bi bi-person me-1"></i> {currentEvidence.autor}</span>
-                          <span className="evidence-meta-badge"><i className="bi bi-calendar me-1"></i> {currentEvidence.fecha}</span>
+                          {currentEvidence.fecha && (
+                            <span className="evidence-meta-badge"><i className="bi bi-calendar me-1"></i> {currentEvidence.fecha}</span>
+                          )}
+                          {currentEvidence.estado && (
+                            <span className="evidence-meta-badge bg-success bg-opacity-20 text-success border-success">
+                              <i className="bi bi-check-circle me-1"></i> {currentEvidence.estado}
+                            </span>
+                          )}
                         </div>
                         {evidences.length > 1 && (
                           <span className="text-white-50 small font-accent">
@@ -105,7 +116,7 @@ export default function GalleryModal({ isOpen, serviceId, onClose }: any) {
 
                   </div>
 
-                  {/* Flechas de navegación funcionales con React */}
+                  {/* Flechas de navegación */}
                   {evidences.length > 1 && (
                     <>
                       <button 
