@@ -99,11 +99,7 @@ export default function GalleryModal({ isOpen, serviceId, onClose }: any) {
                           {currentEvidence.fecha && (
                             <span className="evidence-meta-badge"><i className="bi bi-calendar me-1"></i> {currentEvidence.fecha}</span>
                           )}
-                          {currentEvidence.estado && (
-                            <span className="evidence-meta-badge bg-success bg-opacity-20 text-success border-success">
-                              <i className="bi bi-check-circle me-1"></i> {currentEvidence.estado}
-                            </span>
-                          )}
+                          
                         </div>
                         {evidences.length > 1 && (
                           <span className="text-white-50 small font-accent">
