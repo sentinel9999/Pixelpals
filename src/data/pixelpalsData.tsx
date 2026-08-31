@@ -97,7 +97,15 @@ export const EVIDENCES_BY_SERVICE: Record<string, any[]> = {
       estado: 'Estable',
       link: 'https://landingpagevideoeditor.netlify.app',
       buttonText: 'Ver Landing Page'
-    }
+    },
+    {
+    src: '/IMG/reproductor.png',
+    desc: 'Reproductor web multimedia con controles dinámicos personalizados, soporte de streaming responsivo y gestión de eventos reactivos.',
+    fecha: '2026-05',
+    estado: 'Desplegado',
+    link: 'https://rokolaweb.netlify.app',
+    buttonText: 'Ver Reproductor en Vivo'
+  }
   ],
   cableado: [
     { src: '/IMG/Evidencias/cableado_estructurado1.jpeg', desc: 'Peinado y certificación de rack Cat6A.', fecha: '2026-06', estado: 'Certificado' },
@@ -105,7 +113,7 @@ export const EVIDENCES_BY_SERVICE: Record<string, any[]> = {
     { src: '/IMG/Evidencias/pruebas_red.jpeg', desc: 'Instalación de patch panel y switch.', fecha: '2026-06', estado: 'Certificado' }
   ],
   mantenimiento: [
-    { src: '/IMG/Evidencias/mantenimiento1.jpeg', desc: 'Instalación de gabinete de control.', fecha: '2026-02', estado: 'Mantenido' },
+    { src: '/IMG/Evidencias/mantenimiento1.jpeg', desc: 'Instalación de gabinete de control.', fecha: '2026-02', ñestado: 'Mantenido' },
     { src: '/IMG/Evidencias/mantenimiento2.jpeg', desc: 'Mantenimiento de ordenadores.', fecha: '2026-03', estado: 'Calibrado' },
     { src: '/IMG/Evidencias/armado.jpeg', desc: 'Armado de equipos de cómputo.', fecha: '2026-03', estado: 'Calibrado' }
   ],
